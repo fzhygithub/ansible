@@ -1,0 +1,13 @@
+---
+- hosts: dbservers
+  remote_user: root
+  tasks:
+  - name: ping test connection
+    ping:
+    sudo: yes
+
+  - name: tomcat_11080 kill -9
+    shell: nohup ps -ef | grep java | grep 11080 | grep -v grep | awk '{print $2}' | xargs kill -9 &
+
+  - name: /picc/tomcat_picc4a/tc-4a-11080/bin/startup.sh &
+    shell: nohup /picc/tomcat_picc4a/tc-4a-11080/bin/startup.sh 2>&1 &

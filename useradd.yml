@@ -1,0 +1,10 @@
+---
+- hosts: dbservers
+  vars:
+    username: useradd01
+    password: useradd01
+  tasks:
+  - name: add user
+    user: name={{ username }} state=present
+  - name: set password
+    shell: /bin/echo {{ password }} |/usr/bin/passwd --stdin {{ username }}

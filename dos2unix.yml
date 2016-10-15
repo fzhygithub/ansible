@@ -1,0 +1,11 @@
+---
+- hosts: dbservers
+  vars:
+    http_port: 80
+    max_clients: 200
+  remote_user: root
+
+  tasks:
+  - name: install dos2unix package
+    yum: name=dos2unix state=present
+    when: ansible_os_family == "RedHat"

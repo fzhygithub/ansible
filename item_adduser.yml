@@ -1,0 +1,8 @@
+---
+- hosts: dbservers
+  tasks:
+  - name: add with_items name&groups users
+    user: name={{ item[0] }} groups={{ item[1] }} state=present
+    with_items:
+      - ['ansible_item_name_group_user01','root']
+      - ['ansible_item_name_group_user02','root']

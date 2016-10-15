@@ -1,0 +1,11 @@
+---
+- hosts: 192.168.0.138
+  tasks:
+  - name: install mysql-server & mysql
+    yum: name=mysqld state=present
+#    when: ansible_distribution == "RedHat"
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "5"
+
+  - name: keep mysqld is started
+    service: name=mysqld state=started enabled=yes
+    tags: present
