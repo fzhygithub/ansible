@@ -1,0 +1,4 @@
+---
+- name: restart httpd
+  service: name=httpd state=restarted
+###tail -f /var/log/httpd/error_log

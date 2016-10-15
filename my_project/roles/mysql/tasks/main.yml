@@ -1,0 +1,19 @@
+---
+- name: install mysql-server & mysql
+  yum: name={{item}} state=present
+  when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "5"
+  with_items:
+    - '{{software}}'
+  tags: present
+
+- name: keep mysqld is started
+  service: name=mysqld state=started enabled=yes
+  tags: present
+
+- name: echo_vars
+  shell: echo '{{echo_vars}}'
+  register: result
+- debug: msg='{{result.stdout}}'
+  tags: present
+
+- include: configure.yml

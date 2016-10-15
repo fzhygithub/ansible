@@ -1,0 +1,6 @@
+---
+- hosts: picc
+  remote_user: '{{uservar}}'
+
+  roles:
+    - {role: webserver,tags: ['present']}

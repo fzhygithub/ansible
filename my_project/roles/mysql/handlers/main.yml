@@ -1,0 +1,4 @@
+---
+- name: restart mysqld
+  service: name=mysqld state=restarted
+###tail -10f /var/log/mysqld.log

@@ -1,0 +1,26 @@
+---
+- name: installed httpd
+  yum: name=httpd state=present
+  tags: present
+
+- name: keep httpd running
+  service: name=httpd state=started enabled=yes
+  tags: present
+
+- name: copy index file
+  copy: src=index.html dest=/var/www/index.html
+  tags: present
+
+- name: copy httpd configure file
+  template: src=httpd.conf dest=/etc/httpd/conf/httpd.conf
+  tags: conf
+  notify:
+  - restart httpd
+
+- name: wait for 80 to start
+  wait_for: port=80 timeout=10
+#  wait_for: port=22 state=stopped
+#  wait_for: host=192.168.0.139 port=80 delay=3
+#  wait_for: port=80 state=started delay=3
+#  wait_for: port={{http_port}}
+#  tags: present

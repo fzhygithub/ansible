@@ -1,0 +1,6 @@
+---
+- name: copy mysqld configure file
+  template: src=my.cnf dest=/etc/my.cnf
+  notify:
+  - restart mysqld
+  tags: configure
